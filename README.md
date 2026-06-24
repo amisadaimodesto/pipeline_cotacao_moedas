@@ -12,3 +12,10 @@ O projeto adota a arquitetura modern data stack moderna sob o conceito de **ELT*
 * ![Apache Superset](https://img.shields.io/badge/Apache%20Superset-007A87?style=for-the-badge&logo=apache-superset&logoColor=white) - **Visualização de Dados (BI)**
 
 ## 🏗️ Arquitetura e Fluxo de Dados (ELT)
+hub-inteligencia-cambial/
+└── 🌐 Fontes: API Bacen / AwesomeAPI
+    └── 🚀 Apache Airflow (Extract & Load)
+        └── 🗄️ PostgreSQL: Camada Raw / Staging
+            └── ⚙️ dbt (Transform: Models & Materializations)
+                └── 🗄️ PostgreSQL: Camada Analytics / Marts
+                    └── 📊 Apache Superset (Consumo / BI)
