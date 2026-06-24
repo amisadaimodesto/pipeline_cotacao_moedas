@@ -54,7 +54,7 @@ default_args = {
 }
 ```
 
-###Camada de Consumo e Negócio (Apache Superset)
+### 4. Camada de Consumo e Negócio (Apache Superset)
 O Dashboard atua como um terminal financeiro executivo alimentado diretamente pelas tabelas modeladas pelo dbt:
 
 KPI Cards (Big Numbers): Valor atual (Tempo Real), Máxima e Mínima do dia atualizados dinamicamente com filtros customizados em SQL para expurgar ruídos de madrugadas, focando estritamente no horário comercial (10:00:00 às 19:00:00).
