@@ -30,6 +30,7 @@ plataforma-usd-brl/
 │   └── Componentes: Models, Truncate & Materializations
 └── 📊 Consumo / BI (Apache Superset)
     └── Componente: Dashboards, KPI Cards & Sparklines
+```
 
 ### 1. Ingestão e Orquestração (Apache Airflow)
 O pipeline é gerenciado por esteiras autônomas com frequências distintas no Airflow, responsáveis por extrair os dados brutos e carregá-los direto no PostgreSQL:
