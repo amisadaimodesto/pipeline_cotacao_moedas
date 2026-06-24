@@ -12,10 +12,17 @@ O projeto adota a arquitetura modern data stack moderna sob o conceito de **ELT*
 * ![Apache Superset](https://img.shields.io/badge/Apache%20Superset-007A87?style=for-the-badge&logo=apache-superset&logoColor=white) - **Visualização de Dados (BI)**
 
 ## 🏗️ Arquitetura e Fluxo de Dados (ELT)
-hub-inteligencia-cambial/
-└── 🌐 Fontes: API Bacen / AwesomeAPI
-    └── 🚀 Apache Airflow (Extract & Load)
-        └── 🗄️ PostgreSQL: Camada Raw / Staging
-            └── ⚙️ dbt (Transform: Models & Materializations)
-                └── 🗄️ PostgreSQL: Camada Analytics / Marts
-                    └── 📊 Apache Superset (Consumo / BI)
+
+plataforma-usd-brl/
+├── 🌐 Fontes (APIs)
+│   ├── Banco Central (Bacen - Dados Diários)
+│   └── AwesomeAPI (Intraday - Alta Frequência)
+├── 🚀 Orquestração (Apache Airflow)
+│   └── Processo: Extract & Load via Python Requests
+├── 🗄️ Banco de Dados (PostgreSQL)
+│   ├── 📥 Camada Raw / Staging (Dados Brutos)
+│   └── 📤 Camada Analytics / Marts (Dados Modelados)
+├── ⚙️ Transformação (dbt)
+│   └── Componentes: Models, Truncate & Materializations
+└── 📊 Consumo / BI (Apache Superset)
+    └── Componente: Dashboards, KPI Cards & Sparklines
