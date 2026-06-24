@@ -7,6 +7,7 @@ O projeto adota a arquitetura modern data stack moderna sob o conceito de **ELT*
 ## 🛠️ Stack Tecnológica
 * ![WSL](https://img.shields.io/badge/WSL-0078D4?style=for-the-badge&logo=windows&logoColor=white) - **Ambiente de Desenvolvimento**
 * ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black) - **Sistema Operacional**
+* ![API](https://img.shields.io/badge/API-REST-orange?style=for-the-badge) - **Fonte de Ingestão de Dados**
 * ![Apache Airflow](https://img.shields.io/badge/Apache%20Airflow-017CE1?style=for-the-badge&logo=Apache%20Airflow&logoColor=white) - **Orquestração**
 * ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) - **Linguagem Principal / Ingestão**
 * ![PostgreSQL](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white) - **Banco de Dados / Data Warehouse**
