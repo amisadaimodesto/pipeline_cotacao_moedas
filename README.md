@@ -30,3 +30,30 @@ plataforma-usd-brl/
 │   └── Componentes: Models, Truncate & Materializations
 └── 📊 Consumo / BI (Apache Superset)
     └── Componente: Dashboards, KPI Cards & Sparklines
+
+### 1. Ingestão e Orquestração (Apache Airflow)
+O pipeline é gerenciado por esteiras autônomas com frequências distintas no Airflow, responsáveis por extrair os dados brutos e carregá-los direto no PostgreSQL:
+* **Esteira Intraday (AwesomeAPI):** Captura a variação cambial a cada 15 minutos (`*/15 * * * *`) durante o pregão.
+* **Esteira de Fechamento (Bacen):** Extrai o dado consolidado da PTAX ao final do dia (`0 19 * * *`).
+
+### 2. Transformação e Modelagem de Dados (dbt)
+Após a carga dos dados brutos (*raw data*), o **dbt** assume o papel de higienização, centralização das regras de negócio e modelagem analítica. 
+* **Camada Staging:** Limpeza de tipos, tratamento de timestamps e renomeação de colunas.
+* **Camada Analytics / Marts:** Criação de tabelas e views otimizadas para o BI. Modelos como `bacen_minimas_mensais` e `bacen_variacao_dolar` foram desenvolvidos no dbt para calcular janelas históricas e agregações pesadas direto no banco de dados, poupando poder de processamento da camada de visualização.
+
+### 3. Resiliência e Tolerância a Falhas
+Visando a estabilidade contra instabilidades de APIs de terceiros (como erros `HTTP 500 Internal Server Error` no Bacen), a esteira foi blindada utilizando a estratégia de **Exponential Backoff** no Airflow:
+```python
+default_args = {
+    'retries': 10,
+    'retry_delay': timedelta(minutes=1),
+    'retry_exponential_backoff': True,
+    'max_retry_delay': timedelta(hours=1),
+}
+
+###Camada de Consumo e Negócio (Apache Superset)
+O Dashboard atua como um terminal financeiro executivo alimentado diretamente pelas tabelas modeladas pelo dbt:
+
+KPI Cards (Big Numbers): Valor atual (Tempo Real), Máxima e Mínima do dia atualizados dinamicamente com filtros customizados em SQL para expurgar ruídos de madrugadas, focando estritamente no horário comercial (10:00:00 às 19:00:00).
+
+Gráficos de Linha Dinâmicos: Análise detalhada da performance diária (%d/%m) ajustada para exibir a evolução exata do dólar dentro do mês corrente.
