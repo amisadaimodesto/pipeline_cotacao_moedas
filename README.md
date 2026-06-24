@@ -13,6 +13,7 @@ O projeto adota a arquitetura modern data stack moderna sob o conceito de **ELT*
 
 ## 🏗️ Arquitetura e Fluxo de Dados (ELT)
 
+```text
 plataforma-usd-brl/
 ├── 🌐 Fontes (APIs)
 │   ├── Banco Central (Bacen - Dados Diários)
