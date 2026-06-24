@@ -44,6 +44,7 @@ Após a carga dos dados brutos (*raw data*), o **dbt** assume o papel de higieni
 
 ### 3. Resiliência e Tolerância a Falhas
 Visando a estabilidade contra instabilidades de APIs de terceiros (como erros `HTTP 500 Internal Server Error` no Bacen), a esteira foi blindada utilizando a estratégia de **Exponential Backoff** no Airflow:
+
 ```python
 default_args = {
     'retries': 10,
@@ -51,6 +52,7 @@ default_args = {
     'retry_exponential_backoff': True,
     'max_retry_delay': timedelta(hours=1),
 }
+```
 
 ###Camada de Consumo e Negócio (Apache Superset)
 O Dashboard atua como um terminal financeiro executivo alimentado diretamente pelas tabelas modeladas pelo dbt:
