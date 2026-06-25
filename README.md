@@ -58,3 +58,29 @@ O Dashboard atua como um terminal financeiro executivo alimentado diretamente pe
 KPI Cards (Big Numbers): Valor atual (Tempo Real), Máxima e Mínima do dia atualizados dinamicamente com filtros customizados em SQL para expurgar ruídos de madrugadas, focando estritamente no horário comercial (10:00:00 às 19:00:00).
 
 Gráficos de Linha Dinâmicos: Análise detalhada da performance diária (%d/%m) ajustada para exibir a evolução exata do dólar dentro do mês corrente.
+
+⚡ Otimização de Performance (Client-Side Overhead)
+Para mitigar a latência na renderização de gráficos temporais complexos, foram aplicados filtros SQL dinâmicos (DATE_TRUNC e CURRENT_DATE) diretamente nos metadados do Apache Superset. A paginação lógica isola estritamente o dia e o mês vigentes, eliminando tráfego de rede desnecessário e otimizando o consumo de memória no navegador.
+
+🌐 Resiliência de Redes no Docker Daemon
+Serviços que operam de forma isolada do arquivo Compose principal perdiam comunicação quando a rede bridge era reciclada. O problema foi corrigido mapeando e reassociando os endpoints diretamente no Docker Daemon para garantir comunicação estável na nova subnet ativa.
+
+💻 Developer Experience (DX) via Automação Shell
+Centralização do ciclo de vida do ambiente local por meio de scripts de automação em Bash (ligar_infra e desligar_infra). O script faz o parsing do estado dos contêineres utilizando Go Templates via docker inspect, limpa hashes fantasmas de rede e ativa o ambiente virtual de forma 100% automatizada.
+
+🚀 Como Executar o Projeto
+Pré-requisitos
+Docker e Docker Compose instalados.
+
+Ambiente Linux/WSL 2 configurado.
+
+Inicialização Rápida
+Para facilitar o gerenciamento, utilize as funções em Bash configuradas no ambiente:
+
+```python
+# Para levantar toda a infraestrutura, configurar as redes e abrir as portas
+ligar_infra
+
+# Para interromper os serviços de forma limpa e desativar o ambiente virtual
+desligar_infra
+```
