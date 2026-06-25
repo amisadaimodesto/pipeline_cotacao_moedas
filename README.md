@@ -16,20 +16,18 @@ O projeto adota a arquitetura modern data stack moderna sob o conceito de **ELT*
 
 ## 🏗️ Arquitetura e Fluxo de Dados (ELT)
 
+## 📁 Estrutura do Reposição (Tree)
+
 ```text
-plataforma-usd-brl/
-├── 🌐 Fontes (APIs)
-│   ├── Banco Central (Bacen - Dados Diários)
-│   └── AwesomeAPI (Intraday - Alta Frequência)
-├── 🚀 Orquestração (Apache Airflow)
-│   └── Processo: Extract & Load via Python Requests
-├── 🗄️ Banco de Dados (PostgreSQL)
-│   ├── 📥 Camada Raw / Staging (Dados Brutos)
-│   └── 📤 Camada Analytics / Marts (Dados Modelados)
-├── ⚙️ Transformação (dbt)
-│   └── Componentes: Models, Truncate & Materializations
-└── 📊 Consumo / BI (Apache Superset)
-    └── Componente: Dashboards, KPI Cards & Sparklines
+.
+├── .venv/                           # Ambiente isolado Python (Dependencies)
+├── dags/                            # Orquestração (Apache Airflow)
+│   └── dag_dolar_15min.py           # Script de captura via Requests da API Rest
+├── dbt_project/                     # Camada de Transformação T (dbt Core)
+│   ├── models/                      # Queries SQL de tratamento e views analíticas
+│   └── dbt_project.yml              # Configurações globais do dbt
+├── docker-compose.yml               # Orquestrador de Containers (Banco Postgres)
+└── superset_analytics/              # Configurações de Visualização (Apache Superset)
 ```
 
 ### 1. Ingestão e Orquestração (Apache Airflow)
